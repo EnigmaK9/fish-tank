@@ -2,6 +2,9 @@
 
 #include <GL/glut.h>
 #include "fish_tank.h"
+#include "keyboard.h" // Agrega esta línea
+
+// Resto del código...
 
 int main(int argc, char** argv)
 {
