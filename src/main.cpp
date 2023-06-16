@@ -6,7 +6,7 @@
 #include "variables.h"
 #include "fish_tank.h"
 #include "keyboard.h"
-
+#include "room.h"
 #include "fish.h"
 
 
@@ -49,7 +49,7 @@ int main(int argc, char** argv)
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
 */
     // Register callback functions
-    glutDisplayFunc(displayFishTank);
+    glutDisplayFunc(displayRoom);
     glutSpecialFunc(specialKeys);
     glutKeyboardFunc(keyboard);
 

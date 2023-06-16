@@ -12,12 +12,13 @@ source_files=(
   "${src_dir}/keyboard.cpp"
   "${src_dir}/variables.cpp"
   "${src_dir}/fish.cpp"
-
+  "${src_dir}/room.cpp"  # Agregar room.cpp
 )
 header_files=(
   "${include_dir}/fish_tank.h"
   "${include_dir}/keyboard.h"
   "${include_dir}/variables.h"
+  "${include_dir}/room.h"  # Agregar room.h
 )
 
 # Opciones de compilación
@@ -28,4 +29,3 @@ mkdir -p "${bin_dir}"
 
 # Compilar los archivos fuente
 g++ "${source_files[@]}" ${compiler_flags} -o "${bin_dir}/programa"
-
