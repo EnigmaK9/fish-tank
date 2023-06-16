@@ -16,10 +16,10 @@ void displayFishTank()
     glRotatef(angleY, 0.0f, 1.0f, 0.0f);
     glRotatef(angleZ, 0.0f, 0.0f, 1.0f);
 
-    // Dimensiones de la pecera en metros (dimensiones normales mexicanas)
-    float width = 1.5f;
-    float height = 0.75f;
-    float depth = 0.75f;
+    // Dimensiones de la pecera en metros (dimensiones más pequeñas)
+    float width = 0.75f;
+    float height = 0.375f;
+    float depth = 0.375f;
 
     // Renderizar la pecera
     glEnable(GL_BLEND);
@@ -41,15 +41,11 @@ void displayFishTank()
     glVertex3f(-width / 2, height / 2, -depth / 2);
 
     // Caras laterales (transparentes)
-    glColor4f(0.0f, 0.0f, 1.0f, 0.1f);  // Color azul más transparente
-
-    // Lado izquierdo
     glVertex3f(-width / 2, -height / 2, depth / 2);
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, depth / 2);
 
-    // Lado derecho
     glVertex3f(width / 2, -height / 2, depth / 2);
     glVertex3f(width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, height / 2, -depth / 2);
@@ -61,11 +57,6 @@ void displayFishTank()
     glVertex3f(width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, -height / 2, depth / 2);
 
-    // Cara superior
-    //glVertex3f(-width / 2, height / 2, depth / 2);
-    //glVertex3f(-width / 2, height / 2, -depth / 2);
-    //glVertex3f(width / 2, height / 2, -depth / 2);
-    //glVertex3f(width / 2, height / 2, depth / 2);
 
     glEnd();
 
@@ -113,32 +104,75 @@ void keyboard(unsigned char key, int x, int y)
     // Handle rotation and movement based on WASD keys
     switch (key) {
         case 'w':
-            angleX -= 5.0f;
+        case 'W':
+            angleX -= 10.0f;
             break;
         case 's':
-            angleX += 5.0f;
+        case 'S':
+            angleX += 10.0f;
             break;
         case 'a':
-            angleY -= 5.0f;
+        case 'A':
+            angleY -= 10.0f;
             break;
         case 'd':
-            angleY += 5.0f;
+        case 'D':
+            angleY += 10.0f;
             break;
         case 'q':
-            cameraZ -= 0.1f;
+        case 'Q':
+            cameraZ -= 1.0f;
             break;
         case 'e':
-            cameraZ += 0.1f;
+        case 'E':
+            cameraZ += 1.0f;
             break;
         case 'r':
-            cameraY += 0.1f;
+        case 'R':
+            cameraY += 1.0f;
             break;
         case 'f':
-            cameraY -= 0.1f;
+        case 'F':
+            cameraY -= 1.0f;
+            break;
+        case 'x':
+        case 'X':
+            angleX = 0.0f;
+            angleY = 0.0f;
+            angleZ = 0.0f;
+            cameraX = 0.0f;
+            cameraY = 0.0f;
+            cameraZ = 5.0f;
+            break;
+        case 'i':
+        case 'I':
+            cameraZ -= 1.0f;
+            break;
+        case 'o':
+        case 'O':
+            cameraZ += 1.0f;
+            break;
+        case 'j':
+        case 'J':
+            cameraX -= 1.0f;
+            break;
+        case 'l':
+        case 'L':
+            cameraX += 1.0f;
+            break;
+        case 'k':
+        case 'K':
+            cameraY -= 1.0f;
+            break;
+        case 'm':
+        case 'M':
+            cameraY += 1.0f;
             break;
     }
 
     // Redraw the scene
     glutPostRedisplay();
 }
+
+
 

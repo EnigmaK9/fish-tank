@@ -5,17 +5,48 @@
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv); // Inicializa GLUT
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH); // Configura el modo de visualización
-    glutInitWindowSize(500, 500); // Establece el tamaño de la ventana
-    glutCreateWindow("OpenGL Fish Tank"); // Crea una ventana con el título especificado
+    // Initialize GLUT
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitWindowSize(800, 600);
+    glutCreateWindow("Fish Tank");
 
-    glEnable(GL_DEPTH_TEST); // Habilita el test de profundidad para la representación en 3D
+    // Enable depth testing
+    glEnable(GL_DEPTH_TEST);
 
-    glutDisplayFunc(displayFishTank); // Registra la función de visualización del tanque de peces
-    glutSpecialFunc(specialKeys); // Registra la función para manejar las teclas especiales
-    glutKeyboardFunc(keyboard); // Registra la función para manejar las teclas normales del teclado
-    glutMainLoop(); // Inicia el bucle principal de GLUT
+    // Set up the projection matrix
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(45.0f, 800.0f / 600.0f, 0.1f, 100.0f);
+
+    // Set up the view matrix
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(0.0f, 0.0f, 100.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+
+    // Set up the light
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    GLfloat lightPosition[] = {0.0f, 1.0f, 2.0f, 0.0f};
+    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+
+    // Set up material properties
+    GLfloat ambient[] = {0.2f, 0.2f, 0.2f, 1.0f};
+    GLfloat diffuse[] = {0.8f, 0.8f, 0.8f, 1.0f};
+    GLfloat specular[] = {1.0f, 1.0f, 1.0f, 1.0f};
+    GLfloat shininess[] = {128.0f};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
+
+    // Register callback functions
+    glutDisplayFunc(displayFishTank);
+    glutSpecialFunc(specialKeys);
+    glutKeyboardFunc(keyboard);
+
+    // Start the main loop
+    glutMainLoop();
 
     return 0;
 }
