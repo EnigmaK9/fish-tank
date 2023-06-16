@@ -11,6 +11,8 @@ source_files=(
   "${src_dir}/fish_tank.cpp"
   "${src_dir}/keyboard.cpp"
   "${src_dir}/variables.cpp"
+  "${src_dir}/fish.cpp"
+
 )
 header_files=(
   "${include_dir}/fish_tank.h"
