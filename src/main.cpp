@@ -1,8 +1,15 @@
 // 🌟✨ Programa creado por Carlos Ignacio Padilla Herrera ✨🌟
 
+
+
 #include <GL/glut.h>
+#include "variables.h"
 #include "fish_tank.h"
-#include "keyboard.h" 
+#include "keyboard.h"
+
+#include "fish.h"
+
+
 
 int main(int argc, char** argv)
 {
@@ -19,7 +26,7 @@ int main(int argc, char** argv)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(45.0f, 800.0f / 600.0f, 0.1f, 100.0f);
-
+/*
     // Set up the view matrix
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -40,7 +47,7 @@ int main(int argc, char** argv)
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
-
+*/
     // Register callback functions
     glutDisplayFunc(displayFishTank);
     glutSpecialFunc(specialKeys);

@@ -1,4 +1,5 @@
 #include <GL/glut.h>
+#include "variables.h"
 #include "keyboard.h"
 
 void keyboard(unsigned char key, int x, int y)
@@ -78,3 +79,24 @@ void keyboard(unsigned char key, int x, int y)
 
 
 
+void specialKeys(int key, int x, int y)
+{
+    // Handle rotation based on arrow keys
+    switch (key) {
+        case GLUT_KEY_LEFT:
+            angleY -= 5.0f;
+            break;
+        case GLUT_KEY_RIGHT:
+            angleY += 5.0f;
+            break;
+        case GLUT_KEY_UP:
+            angleX -= 5.0f;
+            break;
+        case GLUT_KEY_DOWN:
+            angleX += 5.0f;
+            break;
+    }
+
+    // Redraw the scene
+    glutPostRedisplay();
+}

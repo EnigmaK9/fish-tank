@@ -1,10 +1,6 @@
 #include <GL/glut.h>
+#include "variables.h"
 #include "fish_tank.h"
-
-// Variables for rotation
-float angleX = 0.0f;
-float angleY = 0.0f;
-float angleZ = 0.0f;
 
 void displayFishTank()
 {
@@ -72,30 +68,7 @@ void displayFishTank()
     glutSwapBuffers();
 }
 
-// Variables para el movimiento de la cámara
-float cameraX = 0.0f;
-float cameraY = 0.0f;
-float cameraZ = 5.0f;
 
-void specialKeys(int key, int x, int y)
-{
-    // Handle rotation based on arrow keys
-    switch (key) {
-        case GLUT_KEY_LEFT:
-            angleY -= 5.0f;
-            break;
-        case GLUT_KEY_RIGHT:
-            angleY += 5.0f;
-            break;
-        case GLUT_KEY_UP:
-            angleX -= 5.0f;
-            break;
-        case GLUT_KEY_DOWN:
-            angleX += 5.0f;
-            break;
-    }
 
-    // Redraw the scene
-    glutPostRedisplay();
-}
+
 
