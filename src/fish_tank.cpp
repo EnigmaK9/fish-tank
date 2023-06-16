@@ -2,27 +2,11 @@
 #include "variables.h"
 #include "fish_tank.h"
 #include "fish.h"
-void displayFishTank()
+
+void renderTankBody(float width, float height, float depth)
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
-
-    // Apply rotations
-    glRotatef(angleX, 1.0f, 0.0f, 0.0f);
-    glRotatef(angleY, 0.0f, 1.0f, 0.0f);
-    glRotatef(angleZ, 0.0f, 0.0f, 1.0f);
-
-    // Dimensiones de la pecera en metros (dimensiones más pequeñas)
-    float width = 0.75f;
-    float height = 0.375f;
-    float depth = 0.375f;
-
-    // Renderizar la pecera
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
     glBegin(GL_QUADS);
-    glColor4f(0.0f, 0.0f, 1.0f, 0.3f);  // Color azul con transparencia
+    glColor3f(0.0f, 0.0f, 1.0f);  // Color azul sólido
 
     // Cara frontal
     glVertex3f(-width / 2, -height / 2, depth / 2);
@@ -36,7 +20,7 @@ void displayFishTank()
     glVertex3f(width / 2, height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, -depth / 2);
 
-    // Caras laterales (transparentes)
+    // Caras laterales
     glVertex3f(-width / 2, -height / 2, depth / 2);
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, -depth / 2);
@@ -53,18 +37,62 @@ void displayFishTank()
     glVertex3f(width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, -height / 2, depth / 2);
 
-
     glEnd();
+}
 
-    glDisable(GL_BLEND);
+void renderTankLeg(float width, float height, float depth)
+{
+    glPushMatrix();
+    glScalef(0.1f, height, 0.1f);  // Dimensiones de la pata (ancho, alto, profundidad)
+    glColor3f(0.6f, 0.4f, 0.2f);  // Color café
+    glutSolidCube(1.0f);  // Renderizar la pata como un cubo sólido
+    glPopMatrix();
+}
+
+void displayFishTank()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+
+    // Apply rotations
+    glRotatef(angleX, 1.0f, 0.0f, 0.0f);
+    glRotatef(angleY, 0.0f, 1.0f, 0.0f);
+    glRotatef(angleZ, 0.0f, 0.0f, 1.0f);
+
+    // Dimensiones de la pecera en metros (dimensiones más pequeñas)
+    float width = 2.25f;   // 3 veces más ancha
+    float height = 1.125f;   // 3 veces más alta
+    float depth = 1.125f;   // 3 veces más profunda
+
+    // Renderizar la pecera
+    renderTankBody(width, height, depth);
+
+    // Renderizar las patas de la pecera
+    glPushMatrix();
+    glTranslatef(-width / 2, -height / 2, -depth / 2);  // Posición de la pata en la esquina inferior izquierda
+    renderTankLeg(width, height, depth);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-width / 2, -height / 2, depth / 2);  // Posición de la pata en la esquina superior izquierda
+    renderTankLeg(width, height, depth);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(width / 2, -height / 2, -depth / 2);  // Posición de la pata en la esquina inferior derecha
+    renderTankLeg(width, height, depth);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(width / 2, -height / 2, depth / 2);  // Posición de la pata en la esquina superior derecha
+    renderTankLeg(width, height, depth);
+    glPopMatrix();
 
     renderFish();
-    
 
     glutSwapBuffers();
 }
-
-
+    
 
 
 
