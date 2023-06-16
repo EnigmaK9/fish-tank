@@ -1,3 +1,6 @@
+#include <GL/glut.h>
+#include "keyboard.h"
+
 void keyboard(unsigned char key, int x, int y)
 {
     // Handle rotation and movement based on WASD keys
