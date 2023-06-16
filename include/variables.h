@@ -10,5 +10,6 @@ extern float angleZ;
 extern float cameraX;
 extern float cameraY;
 extern float cameraZ;
+extern bool keyStates[256];
 
 #endif  // VARIABLES_H

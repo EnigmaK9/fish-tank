@@ -9,3 +9,5 @@ float angleZ = 0.0f;
 float cameraX = 0.0f;
 float cameraY = 0.0f;
 float cameraZ = 0.0f;
+bool keyStates[256] = { false };
+

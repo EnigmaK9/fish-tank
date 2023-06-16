@@ -16,7 +16,7 @@ void displayRoom()
     
     // Renderizar la habitación
     glBegin(GL_QUADS);
-    glColor3f(0.8f, 0.8f, 0.8f);  // Color gris claro
+    glColor3f(0.0f, 1.0f, 0.0f);  // Color verde
  
     // Pared frontal
     glVertex3f(-roomWidth / 2, -roomHeight / 2, roomDepth / 2);

@@ -1,6 +1,17 @@
 #include <GL/glut.h>
 #include "variables.h"
 #include "keyboard.h"
+#include <cmath>
+
+// Variables para el movimiento de la cámara
+float cameraSpeed = 0.1f;
+float cameraDefaultX = 0.0f;
+float cameraDefaultY = 0.0f;
+float cameraDefaultZ = 5.0f;
+
+// Variables para el desplazamiento lateral
+float cameraSideSpeed = 0.1f;
+float cameraSideAngle = 0.0f;
 
 void keyboard(unsigned char key, int x, int y)
 {
@@ -22,54 +33,27 @@ void keyboard(unsigned char key, int x, int y)
         case 'D':
             angleY += 10.0f;
             break;
-        case 'q':
-        case 'Q':
-            cameraZ -= 1.0f;
-            break;
-        case 'e':
-        case 'E':
-            cameraZ += 1.0f;
-            break;
-        case 'r':
-        case 'R':
-            cameraY += 1.0f;
-            break;
-        case 'f':
-        case 'F':
-            cameraY -= 1.0f;
+        case 'z':
+        case 'Z':
+            cameraZ += cameraSpeed;
             break;
         case 'x':
         case 'X':
-            angleX = 0.0f;
-            angleY = 0.0f;
-            angleZ = 0.0f;
-            cameraX = 0.0f;
-            cameraY = 0.0f;
-            cameraZ = 5.0f;
+            cameraZ -= cameraSpeed;
             break;
-        case 'i':
-        case 'I':
-            cameraZ -= 1.0f;
+        case 'r':
+        case 'R':
+            angleX = cameraDefaultX;
+            angleY = cameraDefaultY;
+            cameraZ = cameraDefaultZ;
             break;
-        case 'o':
-        case 'O':
-            cameraZ += 1.0f;
+        case 'q':
+        case 'Q':
+            cameraSideAngle -= 5.0f;
             break;
-        case 'j':
-        case 'J':
-            cameraX -= 1.0f;
-            break;
-        case 'l':
-        case 'L':
-            cameraX += 1.0f;
-            break;
-        case 'k':
-        case 'K':
-            cameraY -= 1.0f;
-            break;
-        case 'm':
-        case 'M':
-            cameraY += 1.0f;
+        case 'e':
+        case 'E':
+            cameraSideAngle += 5.0f;
             break;
     }
 
@@ -77,11 +61,9 @@ void keyboard(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
-
-
 void specialKeys(int key, int x, int y)
 {
-    // Handle rotation based on arrow keys
+    // Handle rotation and movement based on arrow keys
     switch (key) {
         case GLUT_KEY_LEFT:
             angleY -= 5.0f;
@@ -95,8 +77,59 @@ void specialKeys(int key, int x, int y)
         case GLUT_KEY_DOWN:
             angleX += 5.0f;
             break;
+        case GLUT_KEY_PAGE_UP:
+            cameraZ += cameraSpeed;
+            break;
+        case GLUT_KEY_PAGE_DOWN:
+            cameraZ -= cameraSpeed;
+            break;
+        case GLUT_KEY_HOME:
+            angleX = cameraDefaultX;
+            angleY = cameraDefaultY;
+            cameraZ = cameraDefaultZ;
+            break;
+        case GLUT_KEY_F1:
+            angleX = cameraDefaultX;
+            angleY = cameraDefaultY;
+            cameraZ = cameraDefaultZ;
+            break;
     }
 
     // Redraw the scene
     glutPostRedisplay();
+}
+
+void update(int value)
+{
+    // Move the camera based on the side angle
+    float sideX = sin(cameraSideAngle * 3.14159f / 180.0f);
+    float sideZ = cos(cameraSideAngle * 3.14159f / 180.0f);
+
+    // Handle movement based on arrow keys
+    if (keyStates[GLUT_KEY_UP]) {
+        float angleRad = angleY * 3.14159f / 180.0f;
+        cameraX += sin(angleRad) * cameraSpeed;
+        cameraZ -= cos(angleRad) * cameraSpeed;
+    }
+    if (keyStates[GLUT_KEY_DOWN]) {
+        float angleRad = angleY * 3.14159f / 180.0f;
+        cameraX -= sin(angleRad) * cameraSpeed;
+        cameraZ += cos(angleRad) * cameraSpeed;
+    }
+    if (keyStates[GLUT_KEY_LEFT]) {
+        float angleRad = angleY * 3.14159f / 180.0f;
+        cameraX += cos(angleRad) * cameraSideSpeed * sideX;
+        cameraZ += sin(angleRad) * cameraSideSpeed * sideZ;
+    }
+    if (keyStates[GLUT_KEY_RIGHT]) {
+        float angleRad = angleY * 3.14159f / 180.0f;
+        cameraX -= cos(angleRad) * cameraSideSpeed * sideX;
+        cameraZ -= sin(angleRad) * cameraSideSpeed * sideZ;
+    }
+
+    // Redraw the scene
+    glutPostRedisplay();
+
+    // Call update() again after 16 milliseconds
+    glutTimerFunc(16, update, 0);
 }
