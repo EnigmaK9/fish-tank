@@ -34,7 +34,7 @@ irrklang_include_dir="externals/irrklang/include"
 irrklang_lib_dir="externals/irrklang/lib"
 
 # Opciones de compilación adicionales para irrKlang
-compiler_flags+=" -I${irrklang_include_dir} -L${irrklang_lib_dir} -lirrklang"
+compiler_flags+=" -I${irrklang_include_dir} -L${irrklang_lib_dir} -lirrKlang"
 
 # Compilar los archivos fuente
 g++ "${source_files[@]}" ${compiler_flags} -o "${bin_dir}/programa"
