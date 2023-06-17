@@ -11,16 +11,16 @@ void renderFish()
     glTranslatef(0.0f, 0.0f, 0.0f);  // Posición del pez en el centro de la pecera
     glutSolidSphere(0.1f, 20, 20);  // Representación del pez como una esfera
     
-     // Renderizar la cola de pescado
+    // Renderizar la cola de pescado
     glPushMatrix();
     glColor3f(0.0f, 0.0f, 1.0f);  // Color azul para la cola
     
     // Calcular la posición y tamaño de la cola
-    float tailLength = 0.2f;  // Longitud de la cola
+    float tailLength = 0.2f;  // Longitud de la cola (negativa para ubicarla en la parte trasera)
     float tailWidth = 0.05f;  // Anchura de la cola
     
     // Posicionar y rotar la cola con respecto al pez
-    glTranslatef(0.0f, 0.0f, -0.1f);  // Desplazar la cola ligeramente hacia atrás
+    glTranslatef(tailLength, 0.0f, 0.0f);  // Desplazar la cola hacia atrás
     glRotatef(180.0f, 0.0f, 1.0f, 0.0f);  // Invertir la orientación de la cola
     
     // Dibujar la cola de pescado como un prisma rectangular
@@ -33,9 +33,6 @@ void renderFish()
     
     glPopMatrix();  // Finalizar transformación de la cola
     
-
-
-
     // Renderizar la linterna
     glPushMatrix();
     glColor3f(1.0f, 0.0f, 0.0f);  // Color rojo para la linterna
@@ -77,3 +74,5 @@ void renderFish()
     
     // Resto del código...
 }
+
+// Resto del código...
