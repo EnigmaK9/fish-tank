@@ -27,14 +27,5 @@ compiler_flags="-I${include_dir} -lGL -lGLU -lglut"
 # Crear el directorio binario si no existe
 mkdir -p "${bin_dir}"
 
-# Ruta de inclusión de irrKlang
-irrklang_include_dir="externals/irrklang/include"
-
-# Ruta de enlace de irrKlang
-irrklang_lib_dir="externals/irrklang/lib"
-
-# Opciones de compilación adicionales para irrKlang
-compiler_flags+=" -I${irrklang_include_dir} -L${irrklang_lib_dir} -lirrKlang"
-
 # Compilar los archivos fuente
 g++ "${source_files[@]}" ${compiler_flags} -o "${bin_dir}/programa"

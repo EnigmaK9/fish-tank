@@ -6,21 +6,23 @@
 void renderTankBody(float width, float height, float depth)
 {
     glBegin(GL_QUADS);
-    glColor3f(0.0f, 0.0f, 1.0f);  // Color azul sólido
 
     // Cara frontal
+    glColor4f(0.0f, 0.0f, 1.0f, 0.5f);  // Color azul semi-transparente
     glVertex3f(-width / 2, -height / 2, depth / 2);
     glVertex3f(width / 2, -height / 2, depth / 2);
     glVertex3f(width / 2, height / 2, depth / 2);
     glVertex3f(-width / 2, height / 2, depth / 2);
 
     // Cara trasera
+    glColor4f(0.0f, 0.0f, 1.0f, 0.5f);  // Color azul semi-transparente
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, -depth / 2);
 
     // Caras laterales
+    glColor4f(0.0f, 0.0f, 1.0f, 0.5f);  // Color azul semi-transparente
     glVertex3f(-width / 2, -height / 2, depth / 2);
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, -depth / 2);
@@ -32,6 +34,7 @@ void renderTankBody(float width, float height, float depth)
     glVertex3f(width / 2, height / 2, depth / 2);
 
     // Cara inferior
+    glColor4f(0.0f, 0.0f, 1.0f, 0.5f);  // Color azul semi-transparente
     glVertex3f(-width / 2, -height / 2, depth / 2);
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, -height / 2, -depth / 2);
@@ -59,13 +62,20 @@ void displayFishTank()
     glRotatef(angleY, 0.0f, 1.0f, 0.0f);
     glRotatef(angleZ, 0.0f, 0.0f, 1.0f);
 
+    // Enable blending
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     // Dimensiones de la pecera en metros (dimensiones más pequeñas)
-    float width = 2.25f;   // 3 veces más ancha
-    float height = 1.125f;   // 3 veces más alta
-    float depth = 1.125f;   // 3 veces más profunda
+    float width = 2.25f;   
+    float height = 1.125f;   
+    float depth = 1.125f;   
 
     // Renderizar la pecera
     renderTankBody(width, height, depth);
+
+    // Restaurar estado de la mezcla
+    glDisable(GL_BLEND);
 
     // Renderizar las patas de la pecera
     glPushMatrix();
@@ -92,7 +102,3 @@ void displayFishTank()
 
     glutSwapBuffers();
 }
-    
-
-
-

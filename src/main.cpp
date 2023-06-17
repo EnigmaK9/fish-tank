@@ -1,6 +1,4 @@
-// 🌟✨ Programa creado por Carlos Ignacio Padilla Herrera ✨🌟
-
-
+// Programa creado por Carlos Ignacio Padilla Herrera
 
 #include <GL/glut.h>
 #include <iostream>
@@ -9,9 +7,9 @@
 #include "keyboard.h"
 #include "room.h"
 #include "fish.h"
-#include <irrKlang.h>
+//#include <irrKlang.h>
 
-using namespace irrklang;
+//using namespace irrklang;
 
 #pragma comment(lib, "irrKlang.lib") // link with irrKlang.dll
 
@@ -61,7 +59,7 @@ int main(int argc, char** argv)
     // Start the main loop
     glutMainLoop();
 
-    
+    /*
     // start the sound engine with default parameters
     ISoundEngine* engine = createIrrKlangDevice();
 
@@ -95,6 +93,6 @@ int main(int argc, char** argv)
     // Liberar recursos
     sound->drop();
     engine->drop();
-
+    */
     return 0;
 }
