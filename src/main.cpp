@@ -3,6 +3,7 @@
 
 
 #include <GL/glut.h>
+#include <iostream>
 #include "variables.h"
 #include "fish_tank.h"
 #include "keyboard.h"
@@ -11,6 +12,8 @@
 #include <irrKlang.h>
 
 using namespace irrklang;
+
+#pragma comment(lib, "irrKlang.lib") // link with irrKlang.dll
 
 
 int main(int argc, char** argv)
@@ -59,17 +62,18 @@ int main(int argc, char** argv)
     glutMainLoop();
 
     
-    // irrKlang
+    // start the sound engine with default parameters
     ISoundEngine* engine = createIrrKlangDevice();
 
     if (!engine)
-    {
-        // No se pudo crear el dispositivo de irrKlang
-        return 1;
-    }
+      return 0; // error starting up the engine
 
     // Cargar un archivo de sonido
     ISound* sound = engine->play2D("audios/pump-run.mp3", true);
+
+    // play some sound stream, looped
+    engine->play2D("audios/pump-run.mp3", true);
+
 
     if (!sound)
     {
