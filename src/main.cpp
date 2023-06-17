@@ -8,7 +8,9 @@
 #include "keyboard.h"
 #include "room.h"
 #include "fish.h"
+#include <irrKlang.h>
 
+using namespace irrklang;
 
 
 int main(int argc, char** argv)
@@ -55,6 +57,40 @@ int main(int argc, char** argv)
 
     // Start the main loop
     glutMainLoop();
+
+    
+    // irrKlang
+    ISoundEngine* engine = createIrrKlangDevice();
+
+    if (!engine)
+    {
+        // No se pudo crear el dispositivo de irrKlang
+        return 1;
+    }
+
+    // Cargar un archivo de sonido
+    ISound* sound = engine->play2D("audios/pump-run.mp3", true);
+
+    if (!sound)
+    {
+        // No se pudo cargar el archivo de sonido
+        engine->drop();
+        return 1;
+    }
+
+    // Reproducir el sonido
+    sound->setVolume(0.5f);  // Establecer el volumen al 50%
+    sound->setPlayPosition(1000);  // Establecer la posición de reproducción en milisegundos
+
+    // Esperar hasta que el sonido termine de reproducirse
+    while (sound->isFinished() == false)
+    {
+        // Puedes hacer otras operaciones aquí mientras el sonido se reproduce
+    }
+
+    // Liberar recursos
+    sound->drop();
+    engine->drop();
 
     return 0;
 }

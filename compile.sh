@@ -29,3 +29,13 @@ mkdir -p "${bin_dir}"
 
 # Compilar los archivos fuente
 g++ "${source_files[@]}" ${compiler_flags} -o "${bin_dir}/programa"
+
+
+# Ruta de inclusión de irrKlang
+irrklang_include_dir="externals/include"
+
+# Ruta de enlace de irrKlang
+irrklang_lib_dir="externals/lib"
+
+# Opciones de compilación adicionales para irrKlang
+compiler_flags+=" -I${irrklang_include_dir} -L${irrklang_lib_dir} -lirrklang"
