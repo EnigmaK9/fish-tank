@@ -26,7 +26,10 @@ header_files=(
 )
 
 # Compilation options
-compiler_flags="-I${include_dir} -lGL -lGLU -lglut"
+compiler_flags="-I${include_dir} -L/bin/linux-gcc-64 -L/externals/irrklang/lib/irrklang.lib -lGL -lGLU -lglut"
+
+# Add the LD_LIBRARY_PATH variable
+export LD_LIBRARY_PATH=externals/irrklang/lib:$LD_LIBRARY_PATH
 
 # Create the binary directory if it doesn't exist
 mkdir -p "${bin_dir}"
