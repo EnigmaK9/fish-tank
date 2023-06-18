@@ -8,6 +8,7 @@
 
 CCamera objCamera;	//Crea el objeto Camera
 
+   
 
 void keyboard ( unsigned char key, int x, int y )
 {
@@ -15,22 +16,22 @@ void keyboard ( unsigned char key, int x, int y )
 
 		case 'w':   // Movimientos de la cámara
 		case 'W':
-			objCamera.Move_Camera(CAMERASPEED + 0.2f);
+			objCamera.Move_Camera(CAMERA_SPEED + 0.2f);
 			break;
 
 		case 's':
 		case 'S':
-			objCamera.Move_Camera(-(CAMERASPEED + 0.2f));
+			objCamera.Move_Camera(-(CAMERA_SPEED + 0.2f));
 			break;
 
 		case 'a':
 		case 'A':
-			objCamera.Strafe_Camera(-(CAMERASPEED + 0.4f));
+			objCamera.Strafe_Camera(-(CAMERA_SPEED + 0.4f));
 			break;
 
 		case 'd':
 		case 'D':
-			objCamera.Strafe_Camera(CAMERASPEED + 0.4f);
+			objCamera.Strafe_Camera(CAMERA_SPEED + 0.4f);
 			break;
 
 		case 27:        // Cuando Esc es presionado...

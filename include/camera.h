@@ -1,6 +1,6 @@
 #include "main.h"
 
-#define CAMERASPEED 0.07f // Camera Speed
+#define CAMERA_SPEED 0.07f // Camera Speed
 
 // 3D vector struct
 typedef struct tVector3

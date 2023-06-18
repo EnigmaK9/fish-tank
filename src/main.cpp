@@ -1,5 +1,3 @@
-// Programa creado por Carlos Ignacio Padilla Herrera
-
 #include <GL/glut.h>
 #include <iostream>
 #include "variables.h"
@@ -7,7 +5,7 @@
 #include "keyboard.h"
 #include "room.h"
 #include "fish.h"
-
+#include "camera.h" // Include the camera header
 
 CameraMode currentCamera = CAMERA_FRONT;
 
@@ -27,7 +25,6 @@ int main(int argc, char** argv)
     glutSpecialFunc(specialKeys);
     glutKeyboardFunc(keyboard);
 
-    //glutTimerFunc(0, update, 0);
 
     // Start the main loop
     glutMainLoop();
