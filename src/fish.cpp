@@ -2,6 +2,9 @@
 #include "variables.h"
 #include "fish_tank.h"
 #include <cmath>
+#include <iostream>
+
+// Function to render the lantern fish
 
 void renderFish()
 {
@@ -72,7 +75,38 @@ void renderFish()
     
     glPopMatrix();  // Finalizar transformación del pez
     
-    // Resto del código...
 }
+/*
+// Function to update the fish's position
+void updateFish() {
+    // Check if the fish's position variables are declared and initialized
+    // If not, declare and initialize them with default values
+    static float fishX = 0.0f;
+    static float fishY = 0.0f;
+    static float fishZ = 0.0f;
 
-// Resto del código...
+    // Set the fish's movement speed
+    float fishSpeed = 0.1f;
+
+    // Define the boundaries of the fish tank
+    float tankWidth = 2.25f;
+    float tankHeight = 1.125f;
+    float tankDepth = 1.125f;
+
+    // Update the fish's position based on its current position and speed
+    fishX += fishSpeed;
+
+    // Restrict the fish's movement within the tank boundaries
+    if (fishX > tankWidth / 2)
+        fishX = -tankWidth / 2;
+
+    fishY = 0.0f;
+    fishZ = 0.0f;
+
+    // Print the updated fish position for debugging purposes
+    //+std::cout << "Fish Position: (" << fishX << ", " << fishY << ", " << fishZ << ")" << std::endl;
+
+    // Render the fish at its updated position
+    renderFish();
+}
+*/
