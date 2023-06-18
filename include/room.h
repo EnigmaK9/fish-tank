@@ -3,7 +3,8 @@
 
 enum CameraMode {
     CAMERA_FRONT,
-    CAMERA_TOP
+    CAMERA_TOP,
+    CAMERA_OUTSIDE
 };
 
 extern CameraMode currentCamera;

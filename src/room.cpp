@@ -5,20 +5,8 @@
 #include "keyboard.h"
 #include "room.h"
 #include "fish.h"
-
-void specialKeys(int key, int x, int y)
-{
-    switch (key) {
-        case GLUT_KEY_F1:
-            currentCamera = CAMERA_FRONT;
-            break;
-        case GLUT_KEY_F2:
-            currentCamera = CAMERA_TOP;
-            break;
-    }
-
-    glutPostRedisplay();
-}
+#include "skybox.h"
+#include "SOIL.h"
 
 void displayRoom()
 {
@@ -31,7 +19,11 @@ void displayRoom()
         gluLookAt(0.0f, 0.0f, 100.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
     } else if (currentCamera == CAMERA_TOP) {
         gluLookAt(0.0f, 100.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f);
+    } else if (currentCamera == CAMERA_OUTSIDE) {
+        // Set up the camera to view from outside the fish tank
+        gluLookAt(0.0f, 0.0f, 200.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
     }
+
     // Render the room
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -85,7 +77,9 @@ void displayRoom()
     glEnd();
     // Render the fish tank
     displayFishTank();
-
+    // Render the skybox
+    renderSkybox(50.0f); // Tamaño de la skybox
+    
     glutSwapBuffers();
 }
 

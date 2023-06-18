@@ -5,43 +5,53 @@
 
 void renderTankBody(float width, float height, float depth)
 {
+    // Enable blending
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     glBegin(GL_QUADS);
 
-    // Cara frontal
-    glColor4f(0.0f, 0.0f, 1.0f, 0.5f);  // Color azul semi-transparente
+    // Front face - Blue
+    glColor4f(0.0f, 0.0f, 1.0f, 0.5f); // Blue semi-transparent
     glVertex3f(-width / 2, -height / 2, depth / 2);
     glVertex3f(width / 2, -height / 2, depth / 2);
     glVertex3f(width / 2, height / 2, depth / 2);
     glVertex3f(-width / 2, height / 2, depth / 2);
 
-    // Cara trasera
-    glColor4f(0.0f, 0.0f, 1.0f, 0.5f);  // Color azul semi-transparente
+    // Back face - Red
+    glColor4f(1.0f, 0.0f, 0.0f, 0.5f); // Red semi-transparent
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, -depth / 2);
 
-    // Caras laterales
-    glColor4f(0.0f, 0.0f, 1.0f, 0.5f);  // Color azul semi-transparente
+    // Left face - Green
+    glColor4f(0.0f, 1.0f, 0.0f, 0.5f); // Green semi-transparent
     glVertex3f(-width / 2, -height / 2, depth / 2);
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, depth / 2);
 
+    // Right face - Yellow
+    glColor4f(1.0f, 1.0f, 0.0f, 0.5f); // Yellow semi-transparent
     glVertex3f(width / 2, -height / 2, depth / 2);
     glVertex3f(width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, height / 2, -depth / 2);
     glVertex3f(width / 2, height / 2, depth / 2);
 
-    // Cara inferior
-    glColor4f(0.0f, 0.0f, 1.0f, 0.5f);  // Color azul semi-transparente
+    // Bottom face - Cyan
+    glColor4f(0.0f, 1.0f, 1.0f, 0.5f); // Cyan semi-transparent
     glVertex3f(-width / 2, -height / 2, depth / 2);
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, -height / 2, depth / 2);
 
     glEnd();
+
+    // Disable blending
+    glDisable(GL_BLEND);
 }
+
 
 void renderTankLeg(float width, float height, float depth)
 {

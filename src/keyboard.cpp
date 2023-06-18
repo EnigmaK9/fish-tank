@@ -2,7 +2,7 @@
 #include "variables.h"
 #include "keyboard.h"
 #include <cmath>
-
+#include "room.h"
 // Variables para el movimiento de la cámara
 float cameraSpeed = 0.1f;
 float cameraDefaultX = 0.0f;
@@ -55,8 +55,18 @@ void keyboard(unsigned char key, int x, int y)
         case 'E':
             cameraSideAngle += 5.0f;
             break;
+        case GLUT_KEY_F1:
+            currentCamera = CAMERA_FRONT;
+            break;
+        case GLUT_KEY_F2:
+            currentCamera = CAMERA_TOP;
+            break;
+        case GLUT_KEY_F3:
+            currentCamera = CAMERA_OUTSIDE;
+            break;
+        default:
+            break;
     }
-
     // Redraw the scene
     glutPostRedisplay();
 }

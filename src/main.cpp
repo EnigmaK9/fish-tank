@@ -8,6 +8,7 @@
 #include "room.h"
 #include "fish.h"
 
+
 CameraMode currentCamera = CAMERA_FRONT;
 
 int main(int argc, char** argv)
