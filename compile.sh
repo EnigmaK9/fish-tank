@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Directorios de origen y destino
+# Directory paths
 src_dir="src"
 include_dir="include"
 bin_dir="bin"
 
-# Archivos fuente y encabezados
+# Source and header files
 source_files=(
   "${src_dir}/main.cpp"
   "${src_dir}/fish_tank.cpp"
@@ -23,11 +23,11 @@ header_files=(
   "${include_dir}/skybox.h"
 )
 
-# Opciones de compilación
-compiler_flags="-I${include_dir} -lGL -lGLU -lglut  -L/include/SOIL"  # Reemplaza /path/to/soil/library por la ruta correcta
+# Compilation options
+compiler_flags="-I${include_dir} -lGL -lGLU -lglut"
 
-# Crear el directorio binario si no existe
+# Create the binary directory if it doesn't exist
 mkdir -p "${bin_dir}"
 
-# Compilar los archivos fuente
+# Compile the source files
 g++ "${source_files[@]}" ${compiler_flags} -o "${bin_dir}/programa"

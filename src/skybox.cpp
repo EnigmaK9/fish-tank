@@ -1,31 +1,33 @@
-#include "SOIL.h"
 #include <iostream>
 #include <GL/glut.h>
 #include "variables.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
-GLuint skyboxTexture;  // Variable para almacenar el identificador de la textura
+GLuint skyboxTexture; // Variable to store the texture identifier
 
 void loadSkyboxTexture()
 {
-    // Cargar la imagen de textura usando SOIL
-    skyboxTexture = SOIL_load_OGL_texture(
-        "../images/aquarium.jpg",  // Ruta de la imagen de textura
-        SOIL_LOAD_AUTO,  // Opciones de carga de la imagen
-        SOIL_CREATE_NEW_ID,  // Generar un nuevo identificador de textura
-        SOIL_FLAG_INVERT_Y  // Opciones adicionales de carga de la imagen
-    );
-
-    if (skyboxTexture == 0)
+    int width, height, channels;
+    unsigned char *imageData = stbi_load("../images/aquarium.jpg", &width, &height, &channels, 0);
+    if (!imageData)
     {
-        std::cout << "Error cargando la textura de la skybox." << std::endl;
+        std::cout << "Error loading skybox texture." << std::endl;
+        return;
     }
+
+    glGenTextures(1, &skyboxTexture);
+    glBindTexture(GL_TEXTURE_2D, skyboxTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
+
+    stbi_image_free(imageData);
 }
 
 void renderSkybox(float size)
 {
     float halfSize = size / 2;
 
-    // Habilitar el mapeo de textura y cargar la textura
+    // Enable texture mapping and bind the texture
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, skyboxTexture);
 
@@ -36,7 +38,7 @@ void renderSkybox(float size)
     // Disable writing to the depth buffer
     glDepthMask(GL_FALSE);
 
-    // Save the current matrix mode
+    // Save the current modelview matrix
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 
@@ -52,13 +54,13 @@ void renderSkybox(float size)
 
     // Front face
     glColor3f(1.0f, 1.0f, 1.0f);
-    glTexCoord2f(0.0f, 0.0f);  // Coordenadas de textura del vértice inferior izquierdo
+    glTexCoord2f(0.0f, 0.0f);
     glVertex3f(-halfSize, -halfSize, halfSize);
-    glTexCoord2f(1.0f, 0.0f);  // Coordenadas de textura del vértice inferior derecho
+    glTexCoord2f(1.0f, 0.0f);
     glVertex3f(halfSize, -halfSize, halfSize);
-    glTexCoord2f(1.0f, 1.0f);  // Coordenadas de textura del vértice superior derecho
+    glTexCoord2f(1.0f, 1.0f);
     glVertex3f(halfSize, halfSize, halfSize);
-    glTexCoord2f(0.0f, 1.0f);  // Coordenadas de textura del vértice superior izquierdo
+    glTexCoord2f(0.0f, 1.0f);
     glVertex3f(-halfSize, halfSize, halfSize);
 
     // Back face
@@ -124,7 +126,7 @@ void renderSkybox(float size)
     // Enable writing to the depth buffer
     glDepthMask(GL_TRUE);
 
-    // Disable depth testing and mapeo de textura
+    // Disable depth testing and texture mapping
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_TEXTURE_2D);
 }

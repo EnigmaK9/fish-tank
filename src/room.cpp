@@ -6,7 +6,6 @@
 #include "room.h"
 #include "fish.h"
 #include "skybox.h"
-#include "SOIL.h"
 
 void displayRoom()
 {
@@ -78,7 +77,7 @@ void displayRoom()
     // Render the fish tank
     displayFishTank();
     // Render the skybox
-    renderSkybox(50.0f); // Tamaño de la skybox
+    //renderSkybox(50.0f); // Tamaño de la skybox
     
     glutSwapBuffers();
 }
