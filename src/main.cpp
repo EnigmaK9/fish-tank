@@ -27,7 +27,7 @@ int main(int argc, char** argv)
     glutSpecialFunc(specialKeys);
     glutKeyboardFunc(keyboard);
 
-//    glutTimerFunc(0, update, 0);
+    //glutTimerFunc(0, update, 0);
 
     // Start the main loop
     glutMainLoop();

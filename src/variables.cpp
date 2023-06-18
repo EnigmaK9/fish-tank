@@ -7,7 +7,7 @@ glm::vec3 up;  // Up vector for camera orientation
 
 // Global variables
 
-const float CAMERASPEED = 5.0f;  // Velocidad de movimiento de la cámara
+float CAMERASPEED = 5.0f;  // Velocidad de movimiento de la cámara
 
 // Variables for camera movement with arrow keys
 float angleX = 0.0f;  // Rotation angle around the X-axis

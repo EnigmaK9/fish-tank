@@ -19,7 +19,7 @@ extern bool keyStates[256];  // Array to store the state of keyboard keys
 extern float fishX;  // Fish X-coordinate (commented out)
 
 // Variables for camera movement
-extern float cameraSpeed;  // Speed of camera movement
+extern float CAMERASPEED;  // Speed of camera movement
 
 // Variables for camera movement with arrow keys
 extern float angleStep;  // Step size for rotation angles

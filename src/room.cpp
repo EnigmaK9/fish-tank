@@ -19,8 +19,11 @@ void displayRoom()
     } else if (currentCamera == CAMERA_TOP) {
         gluLookAt(0.0f, 100.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f);
     } else if (currentCamera == CAMERA_OUTSIDE) {
-        // Set up the camera to view from outside the fish tank
-        gluLookAt(0.0f, 0.0f, 200.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        // Set up the camera to look outside the fish tank
+        glm::vec3 cameraPosition = glm::vec3(0.0f, 0.0f, 200.0f);
+        glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+        gluLookAt(cameraPosition.x, cameraPosition.y, cameraPosition.z, cameraTarget.x, cameraTarget.y, cameraTarget.z, cameraUp.x, cameraUp.y, cameraUp.z);
     }
 
     // Render the room

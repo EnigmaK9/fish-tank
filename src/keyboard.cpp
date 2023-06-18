@@ -3,53 +3,47 @@
 #include "keyboard.h"
 #include <cmath>
 #include "room.h"
-#include "/home/enigma/Documents/repos/fish-tank/include/glm/glm.hpp"  // Incluye la biblioteca glm
+#include "../include/glm/glm.hpp"  // Incluye la biblioteca glm
+#include "../include/camera.h"  // Incluye la biblioteca glm
+
+CCamera objCamera;	//Crea el objeto Camera
 
 
-void Move_Camera(float speed)
+void keyboard ( unsigned char key, int x, int y )
 {
-    glm::vec3 cameraDirection = glm::normalize(target - position);
-    glm::vec3 displacement = cameraDirection * speed;
+	switch ( key ) {
 
-    position += displacement;
-    target += displacement;
+		case 'w':   // Movimientos de la cámara
+		case 'W':
+			objCamera.Move_Camera(CAMERASPEED + 0.2f);
+			break;
+
+		case 's':
+		case 'S':
+			objCamera.Move_Camera(-(CAMERASPEED + 0.2f));
+			break;
+
+		case 'a':
+		case 'A':
+			objCamera.Strafe_Camera(-(CAMERASPEED + 0.4f));
+			break;
+
+		case 'd':
+		case 'D':
+			objCamera.Strafe_Camera(CAMERASPEED + 0.4f);
+			break;
+
+		case 27:        // Cuando Esc es presionado...
+			exit(0);   // Salimos del programa
+			break;        
+		default:        // Cualquier otra
+			break;
+	}
+
+	glutPostRedisplay();
 }
 
-void Strafe_Camera(float speed)
-{
-    glm::vec3 cameraDirection = glm::normalize(target - position);
-    glm::vec3 cameraRight = glm::normalize(glm::cross(cameraDirection, up));
-    glm::vec3 displacement = cameraRight * speed;
 
-    position += displacement;
-    target += displacement;
-}
-
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key) {
-        case 'w':
-        case 'W':
-            Move_Camera(CAMERASPEED + 5.0f);
-            break;
-        case 's':
-        case 'S':
-            Move_Camera(-(CAMERASPEED + 5.0f));
-            break;
-        case 'a':
-        case 'A':
-            Strafe_Camera(-(CAMERASPEED + 5.0f));
-            break;
-        case 'd':
-        case 'D':
-            Strafe_Camera(CAMERASPEED + 5.0f);
-            break;
-        default:
-            break;
-    }
-
-    glutPostRedisplay();
-}
 
 
 

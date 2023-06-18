@@ -14,6 +14,7 @@ source_files=(
   "${src_dir}/fish.cpp"
   "${src_dir}/room.cpp"
   "${src_dir}/skybox.cpp"
+  "${src_dir}/camera.cpp"   
 )
 header_files=(
   "${include_dir}/fish_tank.h"
@@ -21,6 +22,7 @@ header_files=(
   "${include_dir}/variables.h"
   "${include_dir}/room.h"
   "${include_dir}/skybox.h"
+  "${include_dir}/camera.h"
 )
 
 # Compilation options
