@@ -1,20 +1,16 @@
 #include "../include/camera.h"
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-//                                      CCamera POSITION CAMERA
-/////////////////////////////////////////////////////////////////////////////////////////////////
-void CCamera::Position_Camera(float pos_x, float pos_y, float pos_z,
-                              float view_x, float view_y, float view_z,
-                              float up_x, float up_y, float up_z)
+// Set the position and view of the camera
+void CCamera::Position_Camera(float pos_x, float pos_y, float pos_z, // Set position
+                              float view_x, float view_y, float view_z, // Set view
+                              float up_x, float up_y, float up_z) // Set the up vector
 {
     mPos = tVector3(pos_x, pos_y, pos_z);     // Set position
     mView = tVector3(view_x, view_y, view_z); // Set view
     mUp = tVector3(up_x, up_y, up_z);         // Set the up vector
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-//                                      CCamera MOVE CAMERA
-/////////////////////////////////////////////////////////////////////////////////////////////////
+// Move the camera in the direction it is facing
 void CCamera::Move_Camera(float speed)
 {
     tVector3 vVector = mView - mPos; // Get the view vector
@@ -26,9 +22,7 @@ void CCamera::Move_Camera(float speed)
     mView.z += vVector.z * speed;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-//                                      CCamera ROTATE VIEW
-/////////////////////////////////////////////////////////////////////////////////////////////////
+// Rotate the camera's view around its position
 void CCamera::Rotate_View(float speed)
 {
     tVector3 vVector = mView - mPos; // Get the view vector
@@ -37,9 +31,7 @@ void CCamera::Rotate_View(float speed)
     mView.x = static_cast<float>(mPos.x + cos(speed) * vVector.x - sin(speed) * vVector.z);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-//                                      CCamera STRAFE CAMERA
-/////////////////////////////////////////////////////////////////////////////////////////////////
+// Move the camera perpendicular to its view vector
 void CCamera::Strafe_Camera(float speed)
 {
     tVector3 vVector = mView - mPos; // Get the view vector
@@ -55,9 +47,7 @@ void CCamera::Strafe_Camera(float speed)
     mView.z += vOrthoVector.z * speed;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-//                                      CCamera UP-DOWN CAMERA
-/////////////////////////////////////////////////////////////////////////////////////////////////
+// Move the camera up and down
 void CCamera::UpDown_Camera(float speed)
 {
     tVector3 vVector = mView - mPos; // Get the view vector
