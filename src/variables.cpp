@@ -1,5 +1,5 @@
 #include "variables.h"
-#include "/home/enigma/Documents/repos/fish-tank/include/glm/glm.hpp"
+#include "../include/glm/glm.hpp"
 
 glm::vec3 target;  // Camera target position
 glm::vec3 position;  // Camera position

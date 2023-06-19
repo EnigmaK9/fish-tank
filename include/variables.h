@@ -1,7 +1,7 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
-#include "/home/enigma/Documents/repos/fish-tank/include/glm/glm.hpp"
+#include "glm/glm.hpp"
 
 // Camera variables
 extern glm::vec3 target;  // Camera target position
