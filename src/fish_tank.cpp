@@ -4,47 +4,47 @@
 #include "fish.h"
 
 void renderTankContents(float width, float height, float depth);
-//void renderJellyfish();
+void renderJellyfish();
 void renderBox(float x, float y, float z, float width, float height, float depth, float red, float green, float blue, float alpha);
 
 void renderTankBody(float width, float height, float depth)
 {
-    // Enable blending
+    // Habilitar blending
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glBegin(GL_QUADS);
 
-    // Front face - Blue
-    glColor4f(0.0f, 0.0f, 1.0f, 0.1f); // Blue semi-transparent
+    // Cara frontal - Azul
+    glColor4f(0.0f, 0.0f, 1.0f, 0.1f); // Azul semi-transparente
     glVertex3f(-width / 2, -height / 2, depth / 2);
     glVertex3f(width / 2, -height / 2, depth / 2);
     glVertex3f(width / 2, height / 2, depth / 2);
     glVertex3f(-width / 2, height / 2, depth / 2);
 
-    // Back face - Red
-    glColor4f(1.0f, 0.0f, 0.0f, 0.1f); // Red semi-transparent
+    // Cara trasera - Rojo
+    glColor4f(1.0f, 0.0f, 0.0f, 0.1f); // Rojo semi-transparente
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, -depth / 2);
 
-    // Left face - Green
-    glColor4f(0.0f, 1.0f, 0.0f, 0.1f); // Green semi-transparent
+    // Cara izquierda - Verde
+    glColor4f(0.0f, 1.0f, 0.0f, 0.1f); // Verde semi-transparente
     glVertex3f(-width / 2, -height / 2, depth / 2);
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, depth / 2);
 
-    // Right face - Yellow
-    glColor4f(1.0f, 1.0f, 0.0f, 0.1f); // Yellow semi-transparent
+    // Cara derecha - Amarillo
+    glColor4f(1.0f, 1.0f, 0.0f, 0.1f); // Amarillo semi-transparente
     glVertex3f(width / 2, -height / 2, depth / 2);
     glVertex3f(width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, height / 2, -depth / 2);
     glVertex3f(width / 2, height / 2, depth / 2);
 
-    // Bottom face - Cyan
-    glColor4f(0.0f, 1.0f, 1.0f, 0.1f); // Cyan semi-transparent
+    // Cara inferior - Cian
+    glColor4f(0.0f, 1.0f, 1.0f, 0.1f); // Cian semi-transparente
     glVertex3f(-width / 2, -height / 2, depth / 2);
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, -height / 2, -depth / 2);
@@ -52,46 +52,44 @@ void renderTankBody(float width, float height, float depth)
 
     glEnd();
 
-    // Render water surface (reflected)
-    glEnable(GL_CLIP_PLANE0); // Enable clipping plane for reflection
-    double planeCoefficients[] = {0.0, 1.0, 0.0, 0.0}; // Define reflection plane (y = 0)
-    glClipPlane(GL_CLIP_PLANE0, planeCoefficients); // Set the clipping plane
+    // Renderizar superficie del agua (reflejada)
+    glEnable(GL_CLIP_PLANE0); // Habilitar plano de recorte para el reflejo
+    double planeCoefficients[] = {0.0, 1.0, 0.0, 0.0}; // Definir el plano de reflejo (y = 0)
+    glClipPlane(GL_CLIP_PLANE0, planeCoefficients); // Establecer el plano de recorte
 
     glPushMatrix();
-    glScalef(1.0f, -1.0f, 1.0f); // Invert along the y-axis to reflect
-    renderTankContents(width, height, depth); // Render the contents of the tank (fish, plants, etc.)
-    //renderJellyfish(); // Render the jellyfish
+    glScalef(1.0f, -1.0f, 1.0f); // Invertir a lo largo del eje y para reflejar
+    renderTankContents(width, height, depth); // Renderizar el contenido del acuario (peces, plantas, etc.)
     glPopMatrix();
 
-    glDisable(GL_CLIP_PLANE0); // Disable clipping plane
+    glDisable(GL_CLIP_PLANE0); // Deshabilitar el plano de recorte
 
-    // Disable blending
+    // Deshabilitar blending
     glDisable(GL_BLEND);
 }
 
+
 void renderTankContents(float width, float height, float depth)
 {
-    // Render water surface
+    // Renderizar superficie del agua
     glBegin(GL_QUADS);
-    glColor4f(0.0f, 0.5f, 1.0f, 0.5f); // Light blue semi-transparent
+    glColor4f(0.0f, 0.5f, 1.0f, 0.5f); // Azul claro semi-transparente
     glVertex3f(-width / 2, 0.0f, depth / 2);
     glVertex3f(width / 2, 0.0f, depth / 2);
     glVertex3f(width / 2, 0.0f, -depth / 2);
     glVertex3f(-width / 2, 0.0f, -depth / 2);
     glEnd();
 
-    // Render boxes
+    // Renderizar cajas
     float boxWidth = width * 0.1f;
     float boxHeight = height * 0.2f;
     float boxDepth = depth * 0.1f;
-    
-    // Box on top with color - gray semi-transparent 
+
+    // Caja en la parte superior con color - gris semi-transparente
     renderBox(-10.0f, -10.0f, -10.0f, 2.0f, 2.0f, 2.0f, 0.5f, 0.5f, 0.5f, 0.9f);
 
-    // Box at the bottom with color (1.0, 0.0, 0.0, 0.5) - Red semi-transparent
-    renderBox(-10.0f, 0.0f, -10.0f, 2.0f, 2.0f, 2.0f, 0.5f, 1.0f, 0.0f, 0.5f);
-
-
+    // Caja en la parte inferior con color (1.0, 0.0, 0.0, 0.5) - Rojo semi-transparente
+    renderBox(-10.0f, -2.0f, -10.0f, 2.0f, 2.0f, 2.0f, 0.6f, 0.4f, 0.2f, 0.9f);
 }
 
 void renderBox(float x, float y, float z, float width, float height, float depth, float red, float green, float blue, float alpha)
@@ -104,13 +102,13 @@ void renderBox(float x, float y, float z, float width, float height, float depth
     glPopMatrix();
 }
 
-/*
+
 void renderJellyfish()
 {
     // Set jellyfish parameters
-    float bodyRadius = 1.0f;
-    float tentacleLength = 2.0f;
-    float tentacleRadius = 0.2f;
+    float bodyRadius = 0.010f;
+    float tentacleLength = 0.020f;
+    float tentacleRadius = 0.002f;
     int numTentacles = 8;
 
     // Render jellyfish body
@@ -138,9 +136,9 @@ void renderJellyfish()
     }
 
     // Displace the jellyfish by 2 units along the x, y, and z axes
-    glTranslatef(2.0f, 2.0f, 2.0f);
+    //glTranslatef(-2.0f, -2.0f, -2.0f);
 }
-*/
+
 
 void renderTankLeg(float width, float height, float depth)
 {
@@ -156,27 +154,27 @@ void displayFishTank()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    // Apply rotations
+    // Aplicar rotaciones
     glRotatef(angleX, 1.0f, 0.0f, 0.0f);
     glRotatef(angleY, 0.0f, 1.0f, 0.0f);
     glRotatef(angleZ, 0.0f, 0.0f, 1.0f);
 
-    // Enable blending
+    // Habilitar blending
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    // Dimensiones de la pecera en metros (dimensiones más pequeñas)
+    // Dimensiones del acuario en metros (dimensiones más pequeñas)
     float width = 180.0f;   // 18 metros de ancho
     float height = 90.0f;   // 9 metros de alto
     float depth = 90.0f;    // 9 metros de profundidad
 
-    // Renderizar la pecera
+    // Renderizar el cuerpo del acuario
     renderTankBody(width, height, depth);
 
-    // Restaurar estado de la mezcla
+    // Restaurar estado de blending
     glDisable(GL_BLEND);
 
-    // Renderizar las patas de la pecera
+    // Renderizar las patas del acuario
     glPushMatrix();
     glTranslatef(-width / 2, -height / 2, -depth / 2);  // Posición de la pata en la esquina inferior izquierda
     renderTankLeg(width, height, depth);
@@ -198,6 +196,8 @@ void displayFishTank()
     glPopMatrix();
 
     renderFish();
+
+    renderJellyfish();
 
     glutSwapBuffers();
 }
