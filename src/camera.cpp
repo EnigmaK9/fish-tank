@@ -5,10 +5,11 @@ void CCamera::Position_Camera(float pos_x, float pos_y, float pos_z, // Set posi
                               float view_x, float view_y, float view_z, // Set view
                               float up_x, float up_y, float up_z) // Set the up vector
 {
-    mPos = tVector3(pos_x, pos_y, pos_z);     // Set position
+    mPos = tVector3(pos_x + 20.0f, pos_y + 20.0f, pos_z + 20.0f);     // Set position with displacement
     mView = tVector3(view_x, view_y, view_z); // Set view
     mUp = tVector3(up_x, up_y, up_z);         // Set the up vector
 }
+
 
 // Move the camera in the direction it is facing
 void CCamera::Move_Camera(float speed)
