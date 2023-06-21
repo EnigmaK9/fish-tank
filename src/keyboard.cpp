@@ -4,47 +4,59 @@
 #include <cmath>
 #include "room.h"
 #include "../include/glm/glm.hpp"  // Incluye la biblioteca glm
-#include "../include/camera.h"  // Incluye la biblioteca glm
+//#include "../include/camera.h"  // Incluye la biblioteca glm
+#include <GLFW/glfw3.h>
 
-CCamera objCamera;	//Crea el objeto Camera
+//CCamera objCamera;	//Crea el objeto Camera
 
-   
 
-void keyboard ( unsigned char key, int x, int y )
-{
-	switch ( key ) {
 
-		case 'w':   // Movimientos de la cámara
-		case 'W':
-			objCamera.Move_Camera(CAMERA_SPEED + 0.2f);
-			break;
+// Variables para el movimiento del personaje y la cámara
+float characterPosX = 0.0f;
+float characterPosY = 0.0f;
+float cameraPosX = 0.0f;
+float cameraPosY = 0.0f;
 
-		case 's':
-		case 'S':
-			objCamera.Move_Camera(-(CAMERA_SPEED + 0.2f));
-			break;
+// Función de callback para el teclado
+void keyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    // Movimiento del personaje
+    float characterSpeed = 0.1f;
 
-		case 'a':
-		case 'A':
-			objCamera.Strafe_Camera(-(CAMERA_SPEED + 0.4f));
-			break;
+    if (key == GLFW_KEY_W && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+        characterPosY += characterSpeed;
+    }
 
-		case 'd':
-		case 'D':
-			objCamera.Strafe_Camera(CAMERA_SPEED + 0.4f);
-			break;
+    if (key == GLFW_KEY_S && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+        characterPosY -= characterSpeed;
+    }
 
-		case 27:        // Cuando Esc es presionado...
-			exit(0);   // Salimos del programa
-			break;        
-		default:        // Cualquier otra
-			break;
-	}
+    if (key == GLFW_KEY_A && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+        characterPosX -= characterSpeed;
+    }
 
-	glutPostRedisplay();
+    if (key == GLFW_KEY_D && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+        characterPosX += characterSpeed;
+    }
+
+    // Movimiento de la cámara
+    float cameraSpeed = 0.1f;
+
+    if (key == GLFW_KEY_UP && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+        cameraPosY += cameraSpeed;
+    }
+
+    if (key == GLFW_KEY_DOWN && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+        cameraPosY -= cameraSpeed;
+    }
+
+    if (key == GLFW_KEY_LEFT && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+        cameraPosX -= cameraSpeed;
+    }
+
+    if (key == GLFW_KEY_RIGHT && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+        cameraPosX += cameraSpeed;
+    }
 }
-
-
 
 
 

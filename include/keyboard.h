@@ -1,6 +1,8 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
-void keyboard(unsigned char key, int x, int y);
+#include <GLFW/glfw3.h>
+
+void keyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 #endif

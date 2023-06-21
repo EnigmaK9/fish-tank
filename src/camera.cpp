@@ -1,3 +1,4 @@
+/*
 #include "../include/camera.h"
 
 // Set the position and view of the camera
@@ -60,3 +61,4 @@ void CCamera::UpDown_Camera(float speed)
     mPos.y += vOrthoVector.y * speed;
     mView.y += vOrthoVector.y * speed;
 }
+*/
